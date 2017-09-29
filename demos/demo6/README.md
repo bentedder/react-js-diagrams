@@ -1,5 +1,5 @@
 ## Demo 6
-This demo shows an example of a custom "Icon" node type.
+This demo shows an example of a custom "Icon" node type. In a graph diagram situation there may be a scenario where you want to represent a piece of data with an icon (ie, a phone number, a patient, a hospital).
 
 ### Features
 * Allows user to change icon during navigation of the graph
