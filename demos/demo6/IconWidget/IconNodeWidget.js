@@ -29,7 +29,9 @@ export class IconNodeWidget extends Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ iconName: props.node.iconName });
+    if (!this.state.iconName) {
+      this.setState({ iconName: props.node.iconName });
+    }
   }
 
   openChangeForm() {
