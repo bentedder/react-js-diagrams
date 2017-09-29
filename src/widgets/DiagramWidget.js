@@ -82,38 +82,41 @@ export class DiagramWidget extends React.Component {
         const selectedItems = diagramEngine.getDiagramModel().getSelectedItems();
         const ctrl = (event.metaKey || event.ctrlKey);
 
-        // Select all
-        if (event.keyCode === 65 && ctrl && selectAll) {
-          this.selectAll(true);
-          event.preventDefault();
-          event.stopPropagation();
-        }
+        // Ignoring keydown handler when user is typing in an input
+        if (event.target.tagName.toUpperCase() !== 'INPUT') {
+          // Select all
+          if (event.keyCode === 65 && ctrl && selectAll) {
+            this.selectAll(true);
+            event.preventDefault();
+            event.stopPropagation();
+          }
 
-        // Deselect all
-        if (event.keyCode === 68 && ctrl && deselectAll) {
-          this.selectAll(false);
-          event.preventDefault();
-          event.stopPropagation();
-        }
+          // Deselect all
+          if (event.keyCode === 68 && ctrl && deselectAll) {
+            this.selectAll(false);
+            event.preventDefault();
+            event.stopPropagation();
+          }
 
-        // Copy selected
-        if (event.keyCode === 67 && ctrl && selectedItems.length && copy) {
-          this.copySelectedItems(selectedItems);
-        }
+          // Copy selected
+          if (event.keyCode === 67 && ctrl && selectedItems.length && copy) {
+            this.copySelectedItems(selectedItems);
+          }
 
-        // Paste from clipboard
-        if (event.keyCode === 86 && ctrl && this.state.clipboard && paste) {
-          this.pasteSelectedItems(selectedItems);
-        }
+          // Paste from clipboard
+          if (event.keyCode === 86 && ctrl && this.state.clipboard && paste) {
+            this.pasteSelectedItems(selectedItems);
+          }
 
-        // Delete all selected
-        if ([8, 46].indexOf(event.keyCode) !== -1 && selectedItems.length && deleteItems) {
-          selectedItems.forEach(element => {
-            element.remove();
-          });
+          // Delete all selected
+          if ([8, 46].indexOf(event.keyCode) !== -1 && selectedItems.length && deleteItems) {
+            selectedItems.forEach(element => {
+              element.remove();
+            });
 
-          onChange(diagramEngine.getDiagramModel().serializeDiagram(), { type: 'items-deleted', items: selectedItems });
-          this.forceUpdate();
+            onChange(diagramEngine.getDiagramModel().serializeDiagram(), { type: 'items-deleted', items: selectedItems });
+            this.forceUpdate();
+          }
         }
       })
     });
