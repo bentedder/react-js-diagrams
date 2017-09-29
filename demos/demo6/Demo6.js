@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as RJD from '../../src/main';
-import { IconNodeModel } from './Icon/IconNodeModel';
-import { IconWidgetFactory } from './Icon/IconWidgetFactory';
-import { IconNodeFactory, IconPortFactory } from './Icon/IconInstanceFactories';
+import { IconNodeModel } from './IconWidget/IconNodeModel';
+import { IconWidgetFactory } from './IconWidget/IconWidgetFactory';
+import { IconNodeFactory, IconPortFactory } from './IconWidget/IconInstanceFactories';
 import '../test.scss';
 
 export default class Demo6 extends Component {
