@@ -1,6 +1,21 @@
 import React, { Component, OnChanges } from 'react';
 import { PortWidget } from '../../../src/main';
 
+const ChangeIconForm = ({ icon, closeForm, changeIcon }) => (
+  <form style={styles.changeForm} onSubmit={closeForm}>
+    <div>Change Icon (font-awesome class)</div><br/>
+    fa-<input type="text" value={icon} onChange={changeIcon} />
+    <button type="submit">Change</button>
+    <button type="submit">Cancel</button><br/><br/>
+    <div>Preview: <i className={`fa fa-${icon}`}></i></div><br/><br/>
+    <small>
+      <a style={{ color: '#efefef' }}
+         href="http://fontawesome.io/icons/"
+         target="_blank">See all options on fontawesome.io</a>
+    </small>
+  </form>
+);
+
 export class IconNodeWidget extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +50,9 @@ export class IconNodeWidget extends Component {
         {!this.state.showChangeForm &&
           <i style={styles.faIcon} className={`fa fa-${this.state.iconName || 'file'} fa-2x`}></i>
         }
-        {this.state.showChangeForm && <i style={styles.faIcon.spin} className={'fa fa-cog fa-spin fa-2x'}></i>}
+        {this.state.showChangeForm &&
+          <i style={styles.faIcon.spin} className={'fa fa-cog fa-spin fa-2x'}></i>
+        }
         <div style={{ ...styles.port, ...styles.port.left }}>
           <PortWidget name="left" node={this.props.node} />
         </div>
@@ -43,14 +60,11 @@ export class IconNodeWidget extends Component {
           <PortWidget name="right" node={this.props.node} />
         </div>
         {this.state.showChangeForm &&
-          <form style={styles.changeForm} onSubmit={this.closeChangeForm}>
-            <div>Change Icon (font-awesome class)</div><br/>
-            fa-<input type="text" value={this.state.iconName} onChange={this.changeIcon} />
-            <button type="submit">Change</button>
-            <button type="submit">Cancel</button><br/><br/>
-            <div>Preview: <i className={`fa fa-${this.state.iconName}`}></i></div><br/><br/>
-            <small><a style={{ color: '#efefef' }} href="http://fontawesome.io/icons/" target="_blank">See all options on fontawesome.io</a></small>
-          </form>
+          <ChangeIconForm 
+            icon={this.state.iconName} 
+            closeForm={this.closeChangeForm}
+            changeIcon={this.changeIcon}
+          />
         }
       
       </div>
@@ -61,6 +75,7 @@ export class IconNodeWidget extends Component {
 // Beginnings of some css vars
 const base = 8; // 8px grid for design
 
+// styles here for now
 const styles = {
   icon: {
     position: 'relative', 
