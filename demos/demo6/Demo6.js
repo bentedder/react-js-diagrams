@@ -30,7 +30,6 @@ export default class Demo6 extends Component {
     var node = new RJD.DefaultNodeModel(name, color);
     node.x = x;
     node.y = y;
-    console.log(node);
     return node;
   }
 
@@ -82,10 +81,10 @@ export default class Demo6 extends Component {
     });
 
     // Create the icon node
-    const iconNode = new IconNodeModel('camera');
+    const iconNode = new IconNodeModel('camera'); // ability to set default icon
     iconNode.x = 400;
     iconNode.y = 100;
-    console.log(iconNode);
+
     // Create second node and port
     const node2 = this.createNode({
       name: 'Node 2',
